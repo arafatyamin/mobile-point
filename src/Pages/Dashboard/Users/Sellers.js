@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 const Sellers = () => {
 
     const {data: sellers =[], refetch} = useQuery({
-        queryKey: ['users'],
+        queryKey: ['sellers'],
         queryFn: async()=>{
             const res = await fetch('http://localhost:5000/seller')
             const data= await res.json();
@@ -30,7 +30,7 @@ const Sellers = () => {
 
     return (
         <div>
-            <h1 className='text-3xl text-center mt-5 font-bold text-green-500'>All Users</h1>
+            <h1 className='text-3xl text-center mt-5 font-bold text-green-500'>All Seller</h1>
             <div className="overflow-x-auto">
   <table className="table w-full">
     <thead>
