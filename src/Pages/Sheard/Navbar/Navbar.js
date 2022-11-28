@@ -5,9 +5,24 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 const Navbar = () => {
     const {user, logout} = useContext(AuthContext);
 
+    const handleLogOut=() => {
+        logout()
+        .then(result => {
+            localStorage.removeItem('accessToken')
+        })
+        .catch(err =>console.log(err))
+    }
+
     const menuItems = <React.Fragment>
         <li><Link to='/' className='text-md font-semibold'>HOME</Link></li>
         <li><Link to='/blogs' className='text-md font-semibold'>blogs</Link></li>
+        {
+                       user?.email?  <>
+                       <li><Link to="/dashboard" className="text-md font-semibold">Dashboard</Link></li>
+                       <li><Link onClick={handleLogOut} to="/" className="btn-sm btn-secondary text-lg font-semibold">LogOut</Link></li>
+                       </> :<Link to="/login" className="btn-sm btn-secondary text-lg font-semibold
+                       ">LogIn</Link> 
+                    }
     </React.Fragment>
     return (
         <div>
@@ -24,6 +39,7 @@ const Navbar = () => {
                     </div>
                     <div className="flex">
                     <Link to="/" className=" normal-case lg:text-2xl  font-bold">MobilePoint</Link>
+                <p>{user?.email}</p>
                     </div>
 
                 </div>
@@ -36,13 +52,6 @@ const Navbar = () => {
                     {menuItems}
 
                     </ul>
-                </div>
-                <div className="navbar-end">
-                    {
-                       user?.email?  <Link onClick={logout} to="" className="btn-sm btn-secondary text-lg font-semibold
-                       ">LogOut</Link> :<Link to="/login" className="btn-sm btn-secondary text-lg font-semibold
-                       ">LogIn</Link> 
-                    }
                 </div>
                 </div>
         </div>

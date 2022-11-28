@@ -1,49 +1,75 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
+import useToken from '../../Hooks/useToken';
 
 const Login = () => {
-  const {signIn} = useContext(AuthContext)
+    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { signIn } = useContext(AuthContext);
+    const [loginError, setLoginError] = useState('');
+    const [loginUserEmail, setLoginUserEmail] = useState('');
+    const [token] = useToken(loginUserEmail);
+    const location = useLocation();
+    const navigate = useNavigate();
 
-  const handleSignIn = event => {
-    event.preventDefault();
-    const form = event.target;
-    const email = form.email.value;
-    const password = form.password.value;
-    signIn(email, password)
-    .then(res => res.json())
-        .then(data => console.log(data))
-        .catch(err => console.log(err))
-  }
+    const from = location.state?.from?.pathname || '/';
+
+    
+    if (token) {
+        navigate(from, { replace: true });
+    }
+
+    const handleLogin = data => {
+        console.log(data);
+        setLoginError('');
+        signIn(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                setLoginUserEmail(data.email);
+            })
+            .catch(error => {
+                console.log(error.message)
+                setLoginError(error.message);
+            });
+    }
 
     return (
-        <div className="hero min-h-screen bg-base-200">
-  <div className="hero-content flex-col lg:flex-row-reverse">
-    <div className="text-center lg:text-left">
-      <h1 className="text-5xl font-bold">Login now!</h1>
-      <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-    </div>
-    <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-      <form onSubmit={handleSignIn} className="card-body">
-        <div className="form-control">
-          <input name="email" type="email" placeholder="email" className="input input-bordered rounded-full" />
+        <div className='h-[800px] flex justify-center items-center'>
+            <div className='w-96 p-7'>
+                <h2 className='text-xl text-center'>Login</h2>
+                <form onSubmit={handleSubmit(handleLogin)}>
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label"> <span className="label-text">Email</span></label>
+                        <input type="text"
+                            {...register("email", {
+                                required: "Email Address is required"
+                            })}
+                            className="input input-bordered w-full max-w-xs" />
+                        {errors.email && <p className='text-red-600'>{errors.email?.message}</p>}
+                    </div>
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label"> <span className="label-text">Password</span></label>
+                        <input type="password"
+                            {...register("password", {
+                                required: "Password is required",
+                                minLength: { value: 6, message: 'Password must be 6 characters or longer' }
+                            })}
+                            className="input input-bordered w-full max-w-xs" />
+                        <label className="label"> <span className="label-text">Forget Password?</span></label>
+                        {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
+                    </div>
+                    <input className='btn btn-accent w-full' value="Login" type="submit" />
+                    <div>
+                        {loginError && <p className='text-red-600'>{loginError}</p>}
+                    </div>
+                </form>
+                <p>New to Doctors Portal <Link className='text-secondary' to="/signup">Create new Account</Link></p>
+                <div className="divider">OR</div>
+                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+            </div>
         </div>
-        <div className="form-control">
-          <input name="password" type="password" placeholder="password" className="input input-bordered rounded-full" />
-          <label className="label">
-            <Link to='' className="label-text-alt link link-hover">Forgot password?</Link>
-          </label>
-        </div>
-        <div className="form-control mt-6">
-          <button className="btn btn-primary">Login</button>
-        </div>
-        <label className="label">
-            <Link to='/signup' className="label-text-alt link link-hover text-xl">signup now</Link>
-          </label>
-      </form>
-    </div>
-  </div>
-</div>
     );
 };
 

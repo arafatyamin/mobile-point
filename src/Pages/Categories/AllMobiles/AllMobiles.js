@@ -4,7 +4,7 @@ import Card from '../../Components/Card/Card';
 const AllMobiles = () => {
     const [phones, setPhones] = useState([])
     useEffect(() =>{
-        fetch('http://localhost:5000/mobiles')
+        fetch('http://localhost:5000/products')
         .then(res => res.json())
         .then(data => setPhones(data))
     })
