@@ -4,7 +4,6 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 
 const Navbar = () => {
     const {user, logout} = useContext(AuthContext);
-
     const handleLogOut=() => {
         logout()
         .then(result => {
@@ -40,6 +39,7 @@ const Navbar = () => {
                     <div className="flex">
                     <Link to="/" className=" normal-case lg:text-2xl  font-bold">MobilePoint</Link>
                 <p>{user?.email}</p>
+                <p>{user?.displayName}</p>
                     </div>
 
                 </div>

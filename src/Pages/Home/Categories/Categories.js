@@ -8,13 +8,12 @@ const Categories = () => {
         .then(res => res.json())
         .then(data => setCategories(data))
     },[])
-    console.log(categories);
     return (
         <div className="text-blue-700 h-full flex flex-col mt-10">
             <Link to='/allmobiles' className='text-xl font-semibold hover:link'>Mobiles</Link>
         {
                         categories?.map(category => 
-                            <Link to={`/categories/${category._id}`} className='text-xl font-semibold hover:link'>{category.category_name}
+                            <Link key={category._id} to={`/categories/${category._id}`} className='text-xl font-semibold hover:link'>{category.category_name}
                             </Link>
                         )
                         }

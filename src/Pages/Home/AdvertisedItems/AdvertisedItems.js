@@ -1,23 +1,41 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import { Link } from 'react-router-dom';
+import Card from '../../Components/Card/Card';
+import Loading from '../../Components/Loading/Loading';
 
 const AdvertisedItems = () => {
+
+    const {data: advertiseProducts = [], loading, refetch} = useQuery({
+        queryKey: ['advertiseProducts'],
+        queryFn: async()=>{
+            const res = await fetch(`http://localhost:5000/advertise`)
+            const data = await res.json();
+            return data;
+        }
+    })
+
+    console.log(advertiseProducts);
+
+    if(loading){
+       return <Loading />
+    }
+    refetch()
     return (
-        <div className="carousel w-4/5 mx-auto h-[100px]">
-        <div id="slide1" className="carousel-item relative w-full">
-            <img alt="" src="https://placeimg.com/800/200/arch" className="w-full" />
-            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a href="#slide2" className="text-white text-2xl shadow-sm font-bold">❮</a> 
-            <a href="#slide2" className="text-white text-2xl shadow-sm font-bold">❯</a>
+        <div className="pb-12">
+            <div className="grid lg:grid-cols-3 gap-8 m-12 grid-items-center">
+                {
+                advertiseProducts.map(product =><Card 
+                    key={product._id}
+                    card={product}
+                    ></Card>
+                )
+            }
             </div>
-        </div>
-        <div id="slide2" className="carousel-item relative w-full">
-            <img alt="" src="https://placeimg.com/800/200/arch" className="w-full" />
-            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a href="#slide1" className="text-white text-2xl shadow-sm font-bold">❮</a> 
-            <a href="#slide1" className="text-white text-2xl shadow-sm font-bold">❯</a>
+            <div className="text-center"> 
+            <Link to="/advertises" className="btn border-0 bg-[#01cab8] text-2xl hover:text-[#01cab8] hover:bg-white hover:border-2 hover:border-[#01cab8] rounded-full">see more</Link>
             </div>
-        </div>
-        </div>
+            </div>
     );
 };
 

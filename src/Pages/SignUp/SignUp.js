@@ -1,23 +1,26 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-// import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
-// import useToken from '../../Hooks/useToken';
+import Loading from '../Components/Loading/Loading';
+import useToken from '../../Hooks/useToken';
 
 const SignUp = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const { createUser, updateUserProfile, loading } = useContext(AuthContext);
     const [signUpError, setSignUPError] = useState('');
-    // const [createdUserEmail, setCreatedUserEmail] = useState('')
-    // const [token] = useToken(createdUserEmail);
-    // const navigate = useNavigate();
+    const [createdUserEmail, setCreatedUserEmail] = useState('')
+    const [token] = useToken(createdUserEmail);
+    const navigate = useNavigate();
     const formData = new FormData();
 
 
-    // if(token){
-    //     navigate('/');
-    // }
+    if(token) {
+        return navigate('/')
+    }
+
+    
     
 
     const handleSignUp = (data) => {
@@ -25,38 +28,47 @@ const SignUp = () => {
         console.log(data);
         const image = data.image[0];
         
-        createUser(data.email, data.password)
+        
+
+            // update imagebb
+            formData.append('image', image);
+        const url = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_imgbbKey}`
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.json())
+        .then(imgData => {
+            console.log(imgData)
+            if(imgData.success) {
+
+                createUser(data.email, data.password)
             .then(result => {
-                const user = result.user;
-                console.log(user);
-                toast('User Created Successfully.')
+                updateUserProfile(data.name, imgData.data.url)
+                .then(result =>{
+                    saveUser(data.email)
+                    toast.success('User Created Successfully.')
+                })
+                
+                
+                
             })
             .catch(error => {
                 console.log(error)
                 setSignUPError(error.message)
             });
-
-            // update imagebb
-            formData.append('image', image);
-        const url = `https://api.imgbb.com/1/upload?key=21faedf05bc7952fab40f5291fa76110`
-        fetch(url, {
-            method: 'POST',
-            body: formData
-        })
-        
-        .then(res => res.json())
-        .then(imgData => {
-            if(imgData.success) {
-                console.log(imgData.data.url)
+               
+                
                 
                 const user = {
                     name: data.name,
                     email: data.email,
                     role: data.role,
+                    image: imgData.data.url,
                 }
                 
 
-
+                const saveUser = ( email) =>{
                 fetch('http://localhost:5000/users', {
                     method: 'POST',
                     headers: {
@@ -65,27 +77,30 @@ const SignUp = () => {
                     body: JSON.stringify(user)
                 })
                 .then(res => res.json())
-                .then(imgData =>{ 
-                    updateUserProfile(data.name, imgData)
+                .then(data =>{ 
+                    console.log(data)
+                    setCreatedUserEmail(email)
                 })
+            }
             }
         })
 
     }
 
+    
+    if(loading){
+        return <Loading></Loading>
+    }
    
     return (
         <div className="hero min-h-screen bg-base-200">
   <div className="hero-content flex-col ">
-    <div className="text-center lg:text-left">
-      <h1 className="text-5xl font-bold">SignUp now!</h1>
-      <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-    </div>
-    <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+    
+    <div className="card p-4 w-full max-w-sm shadow-2xl bg-base-100">
     <form onSubmit={handleSubmit(handleSignUp)}>
                     <div className="form-control w-full max-w-xs">
                     <select {...register("role")} className="select w-full max-w-xs text-base-content">
-                        <option disabled selected className="">user</option>
+                        <option value='user'>user</option>
                         <option  value="seller">seller</option>
                     </select>
                         <label className="label"> <span className="label-text">Name</span></label>
@@ -118,6 +133,9 @@ const SignUp = () => {
                         {errors.img && <p className='text-red-500'>{errors.img.message}</p>}
                     </div>
                     <input className='btn btn-accent w-full mt-4' value="Sign Up" type="submit" />
+                    <div className='text-center'>
+                    <Link to='/login'>have a account <span className='text-lg link text-blue-700'>logIn</span></Link>
+                    </div>
                     {signUpError && <p className='text-red-600'>{signUpError}</p>}
                 </form>
         

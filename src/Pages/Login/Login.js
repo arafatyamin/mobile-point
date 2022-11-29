@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 import useToken from '../../Hooks/useToken';
@@ -8,32 +9,40 @@ const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { signIn } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
-    const [loginUserEmail, setLoginUserEmail] = useState('');
-    const [token] = useToken(loginUserEmail);
+    const [logInUserEmail, setLogInUserEmail] = useState('')
+    const [token] = useToken(logInUserEmail);
     const location = useLocation();
     const navigate = useNavigate();
 
     const from = location.state?.from?.pathname || '/';
 
-    
-    if (token) {
+    if(token){
         navigate(from, { replace: true });
     }
 
+    
+    
+
     const handleLogin = data => {
-        console.log(data);
+        const email = data.email;
+        const password = data.password;
         setLoginError('');
-        signIn(data.email, data.password)
+        signIn(email, password)
             .then(result => {
-                const user = result.user;
-                console.log(user);
-                setLoginUserEmail(data.email);
+                toast.success('user login successfully')
+                setLogInUserEmail(email)
             })
             .catch(error => {
                 console.log(error.message)
                 setLoginError(error.message);
             });
     }
+
+   
+
+
+
+
 
     return (
         <div className='h-[800px] flex justify-center items-center'>

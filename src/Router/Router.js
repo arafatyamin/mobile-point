@@ -13,6 +13,9 @@ import Products from "../Pages/Products/Products";
 import SignUp from "../Pages/SignUp/SignUp";
 import AddProduct from "../Pages/Dashboard/AddProduct/AddProduct";
 import ManageProduct from "../Pages/Dashboard/ManageProduct/ManageProduct";
+import PrivateRoute from "./PrivateRoute";
+import AllUsers from "../Pages/Dashboard/Users/AllUsers";
+import Advertises from "../Pages/Home/AdvertisedItems/Advertises";
 
 
 const router = createBrowserRouter([
@@ -31,6 +34,10 @@ const router = createBrowserRouter([
         {
             path:'/blogs',
             element:<Blogs></Blogs>
+        },
+        {
+            path:'/advertises',
+            element:<Advertises></Advertises>
         },
         {
             path:'/categories/:id',
@@ -54,7 +61,7 @@ const router = createBrowserRouter([
 },
 {
     path:'/dashboard',
-    element:<DashboardLayout></DashboardLayout>,
+    element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
     children: [
         {
             path:'/dashboard',
@@ -63,6 +70,10 @@ const router = createBrowserRouter([
         {
             path:'/dashboard/allorders',
             element: <AllOrders></AllOrders>, 
+        },
+        {
+            path:'/dashboard/allUsers',
+            element: <AllUsers></AllUsers>, 
         },
         {
             path:'/dashboard/allsellers',

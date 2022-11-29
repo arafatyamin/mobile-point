@@ -1,13 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import ConfirmationModal from '../../Components/ConfirmationModal/ConfirmationModal';
+import Loading from '../../Components/Loading/Loading';
 
 const MyOrders = () => {
+  const [deletingOrder, setDeletingOrder] = useState(null)
+    const closeModal = () => {
+        setDeletingOrder(null);
+    }
     const {user} = useContext(AuthContext);
 
-    const url = `http://localhost:5000/bookings?email=${user?.email}`;
+    const url = `http://localhost:5000/myOrder?email=${user?.email}`;
 
-    const {data: bookings = []} = useQuery({
+    const {data: bookings = [], isLoading, refetch} = useQuery({
         queryKey: ['bookings', user?.email],
         queryFn: async () =>{
             const res = await fetch(url, {
@@ -21,7 +28,26 @@ const MyOrders = () => {
     })
 
 
-    console.log(bookings)
+    const handleDeleteOrder = booking => {
+      fetch(`http://localhost:5000/booking/${booking._id}`, {
+          method: 'DELETE',
+          headers: {
+              authorization: `bearer ${localStorage.getItem('accessToken')}`
+          }
+      })
+      .then(res => res.json())
+      .then(data => {
+          console.log(data);
+          if(data.deletedCount > 0) {
+              refetch();
+              toast.success(`Doctor ${booking.name} deleted successfully`)
+          }
+      })
+  }
+
+  if(isLoading){
+      return <Loading></Loading>
+  }
 
     return (
         <div>
@@ -35,6 +61,7 @@ const MyOrders = () => {
         <th>Product</th>
         <th>email</th>
         <th>address</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -46,15 +73,25 @@ const MyOrders = () => {
             <td>{booking.productName}</td>
             <td>{booking.email}</td>
             <td>{booking.address}</td>
+            <td><label 
+                        onClick={() => setDeletingOrder(booking)} 
+                        htmlFor="confirmation-modal" className="btn btn-xs">delete</label></td>
           </tr>)
      }
       
-     
-       
     </tbody>
   </table>
 </div>
-            
+{
+                deletingOrder && <ConfirmationModal
+                title={`Are you sure you want to delete?`}
+                message={`if you delete ${deletingOrder.productName} .It cannot be undone.`}
+                successAction={handleDeleteOrder}
+                successButtonName= 'Delete'
+                modalData = {deletingOrder}
+                closeModal = {closeModal}
+                ></ConfirmationModal>
+            } 
         </div>
 
     );

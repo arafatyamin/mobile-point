@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import Card from '../Components/Card/Card';
 import ProductModal from '../Components/Modal/ProductModal';
@@ -11,9 +11,10 @@ const Products = () => {
     
 
     return (
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid lg:grid-cols-3 gap-8 m-12 grid-items-center">
             {
                 products.map(card => <Card
+                key={card._id}
                 card={card}
                 setProduct={setProduct}
                 ></Card>)

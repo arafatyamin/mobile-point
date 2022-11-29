@@ -1,18 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import Card from '../../Components/Card/Card';
+import ProductModal from '../../Components/Modal/ProductModal';
 
 const AllMobiles = () => {
-    const [phones, setPhones] = useState([])
+    const [allMobiles, setAllMobiles] = useState([])
+    const [product, setProduct] = useState('');
     useEffect(() =>{
         fetch('http://localhost:5000/products')
         .then(res => res.json())
-        .then(data => setPhones(data))
-    })
+        .then(data => setAllMobiles(data))
+    }, [setAllMobiles])
     return (
         <div className="grid grid-cols-4 gap-4 mx-4">
             {
-                phones.map(card => <Card card={card}></Card>)
+                allMobiles.map(card => <Card
+                key={card._id}
+                card={card}
+                setProduct={setProduct}
+                ></Card>)
             }
+            <div>
+            <ProductModal 
+            product={product}
+            setProduct={setProduct}
+            ></ProductModal>
+            </div>
         </div>
     );
 };

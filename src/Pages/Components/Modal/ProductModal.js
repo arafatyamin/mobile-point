@@ -1,5 +1,7 @@
+import { format } from "date-fns";
 import React, { useContext } from "react";
 import { toast } from 'react-hot-toast';
+import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
 const ProductModal = ({product,setProduct}) => {
@@ -7,6 +9,11 @@ const ProductModal = ({product,setProduct}) => {
   const { title, sellPrice, _id, sellerName, sellerEmail
   } = product;
   const {user} = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || '/dashboard';
+  
 
 const handlePurchase =event =>{
     event.preventDefault();
@@ -27,7 +34,7 @@ const buying = {
   sellerName,
   sellerEmail,
   productId:_id,
-  time:
+  postTime: format(new Date(), "Pp"),
 }
 
 fetch('http://localhost:5000/booking', {
@@ -41,12 +48,17 @@ fetch('http://localhost:5000/booking', {
 .then(data =>{
   console.log(data)
  if(data.acknowledged){
+   toast.success('confirm successfully')
   setProduct('')
-  toast.success('Booking confirmed')
  }
+ if(!data.acknowledged){
+   toast.error(data.message)
+   
+ }
+ 
 })
     
-    
+navigate(from, { replace: true }); 
     
 }
 
@@ -96,17 +108,19 @@ fetch('http://localhost:5000/booking', {
               name="phone"
               placeholder="Phone number"
               className="input input-bordered input-info w-full  mt-3"
+              required
             />
              <input
               type="text"
               name="address"
               placeholder="your address"
               className="input input-bordered input-info w-full  mt-3"
+              required
             />
             <input
               type="submit"
               className="input w-full  mt-5 btn btn-success"
-              value="Submit"
+              value="Submit" 
             />
           </form>
         </div>
