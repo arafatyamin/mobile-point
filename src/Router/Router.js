@@ -11,6 +11,8 @@ import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import Products from "../Pages/Products/Products";
 import SignUp from "../Pages/SignUp/SignUp";
+import AddProduct from "../Pages/Dashboard/AddProduct/AddProduct";
+import ManageProduct from "../Pages/Dashboard/ManageProduct/ManageProduct";
 
 
 const router = createBrowserRouter([
@@ -69,6 +71,14 @@ const router = createBrowserRouter([
         {
             path:'/dashboard/allbuyers',
             element: <Buyers></Buyers>, 
+        },
+        {
+            path:'/dashboard/addproduct',
+            element: <AddProduct></AddProduct>, 
+        },
+        {
+            path:'/dashboard/manageproduct',
+            element: <ManageProduct></ManageProduct>, 
         },
         
     ]

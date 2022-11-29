@@ -1,13 +1,14 @@
 import React from 'react';
 
 const Card = ({card, setProduct}) => {
-    const {img, title, category, sellPrice, originalPrice, usedTime,} = card;
+    const {img, title, category, sellPrice, originalPrice, usedTime, postTime} = card;
     return (
         <div className="card  shadow-2xl h-[450px]">
         <figure className="h-[250px] w-full">
             <img src={img} alt="Shoes" className="rounded-xl h-full w-full" />
         </figure>
         <div className="card-body grow-0 gap-px items-center text-center">
+            <span>{postTime}</span>
             <h2 className="card-title leading-none">{title}</h2>
             <p>{category}</p>
             <p>original price:<span className="line-through">{originalPrice}</span></p>
@@ -19,8 +20,6 @@ const Card = ({card, setProduct}) => {
             className="btn"
             onClick={() => setProduct(card)}
             >booking</label>
-
-            
             </div>
         </div>
         </div>

@@ -26,7 +26,8 @@ const buying = {
   address,
   sellerName,
   sellerEmail,
-  _id
+  productId:_id,
+  time:
 }
 
 fetch('http://localhost:5000/booking', {
