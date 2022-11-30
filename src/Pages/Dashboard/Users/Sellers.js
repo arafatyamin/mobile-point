@@ -7,7 +7,7 @@ const Sellers = () => {
     const {data: sellers =[], refetch} = useQuery({
         queryKey: ['sellers'],
         queryFn: async()=>{
-            const res = await fetch('http://localhost:5000/seller',{
+            const res = await fetch('https://mobile-resell-server.vercel.app/seller',{
                 headers: {
                     'Content-Type': 'application/json',
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -18,7 +18,7 @@ const Sellers = () => {
         }
     });
         const handleMakeVerify =id =>{
-        fetch(`http://localhost:5000/users/admin/${id}`,{
+        fetch(`https://mobile-resell-server.vercel.app/users/admin/${id}`,{
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

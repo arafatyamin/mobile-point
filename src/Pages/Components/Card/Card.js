@@ -9,7 +9,7 @@ const Card = ({card, setProduct}) => {
             <div className="">
                 <div  className="card bg-white rounded-3xl shadow-xl">
                         
-                        <div className="card-body items-center text-[#175c62]  text-center">
+                        <div className="card-body items-center text-[#2456c2]  text-center">
                         <img src={img}  alt={title} className="w-2/6" />
                         <span className="text-end">{postTime}</span>
                             <h2 className="card-title">{title}</h2>
@@ -36,22 +36,6 @@ const Card = ({card, setProduct}) => {
             </div>
             
             </div>
-        
-
-        // <div className="card  shadow-2xl h-[450px]">
-        // <figure className="h-[250px] w-full">
-        //     <img src={img} alt="Shoes" className="rounded-xl h-full w-full" />
-        // </figure>
-        // <div className="card-body grow-0 gap-px items-center text-center">
-        //     <span>{postTime}</span>
-        //     <h2 className="card-title leading-none">{title}</h2>
-        //     <p>{category}</p>
-        //     <p>original price:<span className="line-through">{originalPrice}</span></p>
-        //     <p>resale price:{sellPrice}</p>
-        //     <p>used: {usedTime}</p>
-        //     
-        // </div>
-        // </div>
     );
 };
 

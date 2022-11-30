@@ -18,8 +18,8 @@ const Navbar = () => {
         {
                        user?.email?  <>
                        <li><Link to="/dashboard" className="text-md font-semibold">Dashboard</Link></li>
-                       <li><Link onClick={handleLogOut} to="/" className="btn-sm btn-secondary text-lg font-semibold">LogOut</Link></li>
-                       </> :<Link to="/login" className="btn-sm btn-secondary text-lg font-semibold
+                       <li><Link onClick={handleLogOut} to="/" className="btn-sm btn-secondary text-lg font-semibold hover:bg-white bg-[#01cab8] hover:text-[#01cab8] text-white hover:border-2 hover:border-[#01cab8] rounded-full">LogOut</Link></li>
+                       </> :<Link to="/login" className="btn-sm btn-secondary text-lg font-semibold hover:bg-white bg-[#01cab8] hover:text-[#01cab8] text-white hover:border-2 hover:border-[#01cab8] rounded-full
                        ">LogIn</Link> 
                     }
     </React.Fragment>

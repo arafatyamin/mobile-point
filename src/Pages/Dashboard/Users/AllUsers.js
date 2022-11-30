@@ -6,7 +6,7 @@ const AllUsers = () => {
     const {data: users =[], refetch} = useQuery({
         queryKey: ['users'],
         queryFn: async()=>{
-            const res = await fetch('http://localhost:5000/users',{
+            const res = await fetch('https://mobile-resell-server.vercel.app/users',{
                 headers: {
                     'Content-Type': 'application/json',
                     authorization: `bearer ${localStorage.getItem('accessToken')}`

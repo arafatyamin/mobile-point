@@ -10,7 +10,7 @@ const AdvertisedItems = () => {
     const {data: advertiseProducts = [], loading, refetch} = useQuery({
         queryKey: ['advertiseProducts'],
         queryFn: async()=>{
-            const res = await fetch(`http://localhost:5000/advertiseLimit`,{
+            const res = await fetch(`https://mobile-resell-server.vercel.app/advertiseLimit`,{
                 headers: {
                     'Content-Type': 'application/json',
                     authorization: `bearer ${localStorage.getItem('accessToken')}`

@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Link } from "react-router-dom";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Root from "../Layout/Root";
 import AllMobiles from "../Pages/Categories/AllMobiles/AllMobiles";
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
         {
             path:'/categories/:id',
             element:<Products></Products>,
-            loader:({params}) => fetch(`http://localhost:5000/categories/${params.id}`)
+            loader:({params}) => fetch(`https://mobile-resell-server.vercel.app/categories/${params.id}`)
 
         },
         
@@ -93,7 +93,15 @@ const router = createBrowserRouter([
         },
         
     ]
-}
+},
+{
+    path: '*',
+    element: <>
+    <h2 className="text-4xl text-[#023467] font-bold text-center">404</h2>
+    <p className="text-center py-4">Page Not Found, It might have been moved, renamed, or deleted</p>
+    <Link to="/" className="flex justify-center text-xl pb-4 text-[#023467]  hover:text-[#175c62] link">return home</Link>
+    </>
+  }
 ])
 
 export default router;
