@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Loading from '../../Components/Loading/Loading';
 
 const Carousel = () => {
 
@@ -12,7 +13,10 @@ const Carousel = () => {
             return data;
         }
     })
-
+    if(loading){
+        <Loading></Loading>
+    }
+    refetch()
     return (
         <div className="carousel w-full h-[400px]">
             {

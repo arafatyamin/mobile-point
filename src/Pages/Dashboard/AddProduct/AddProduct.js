@@ -15,7 +15,6 @@ const AddProduct = () => {
     const navigate = useNavigate()
 
     const {user} = useContext(AuthContext)
-    console.log(user)
 
     // fetch categories
     const {data: categories = []} = useQuery({
@@ -33,13 +32,9 @@ const AddProduct = () => {
         
         const image = data.image[0];
         formData.append('image', image);
-        const url = `https://api.imgbb.com/1/upload?key=21faedf05bc7952fab40f5291fa76110`
+        const url = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_imgbbKey}`
         fetch(url, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                authorization: `bearer ${localStorage.getItem('accessToken')}`
-            },
             body: formData
         })
         .then(res => res.json())
@@ -48,7 +43,7 @@ const AddProduct = () => {
             if(imgData.success) {
                 console.log(imgData.data.url)
                 
-                const doctor = {
+                const product = {
                     title: productName,
                     location: location,
                     originalPrice: originalPrice,
@@ -71,7 +66,7 @@ const AddProduct = () => {
                         'Content-Type': 'application/json',
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     },
-                    body: JSON.stringify(doctor)
+                    body: JSON.stringify(product)
                 })
                 .then(res => res.json())
                 .then(result => {
@@ -102,7 +97,6 @@ const AddProduct = () => {
                 <div className="form-control w-full max-w-xs">
                         <label className="label"> <span className="label-text">photo</span></label>
                         <input type="file" {...register("image", {
-                            required: "image is Required"
                         })} className="input  w-full max-w-xs" />
                 </div>
                 <div className="form-control">

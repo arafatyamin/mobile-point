@@ -17,6 +17,24 @@ const Sellers = () => {
             return data;
         }
     });
+
+    const handleDeleteUser = id => {
+        console.log(id)
+        fetch(`http://localhost:5000/user/${id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if(data.deletedCount > 0) {
+                refetch();
+                toast.success(` user deleted successfully`)
+            }
+        })
+    }
         const handleMakeVerify =id =>{
         fetch(`https://mobile-resell-server.vercel.app/users/admin/${id}`,{
             method: 'PUT',
@@ -34,18 +52,19 @@ const Sellers = () => {
         })
         }
 
+
+
     return (
         <div>
             <h1 className='text-3xl text-center mt-5 font-bold text-green-500'>All Seller</h1>
             <div className="overflow-x-auto">
-  <table className="table w-full">
+  <table className="table-auto lg:w-full">
     <thead>
       <tr>
         <th></th>
         <th>Name</th>
         <th>Email</th>
-        <th>Admin</th>
-        <th>Delete</th>
+        <th>action</th>
       </tr>
     </thead>
     <tbody>
@@ -54,8 +73,8 @@ const Sellers = () => {
             <th>{i+1}</th>
         <td>{seller.name}</td>
         <td>{seller.email}</td>
-        <td>{seller?.role !== 'admin' && <button onClick={()=>handleMakeVerify(seller._id)} className='btn btn-success'>Make verify</button>}</td>
-        <td><button className='btn btn-secondary'>Delete</button></td>
+        <td>{seller?.role !== 'admin' && <button onClick={()=>handleMakeVerify(seller._id)} className='btn-sm btn-success'>Make verify</button>}</td>
+        <td><button className='btn-sm btn-secondary' onClick={()=>handleDeleteUser(seller._id)}>Delete</button></td>
         </tr>)
         }
     </tbody>
