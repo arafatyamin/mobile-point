@@ -19,7 +19,7 @@ const Buyers = () => {
     });
     const handleDeleteUser = id => {
         console.log(id)
-        fetch(`http://localhost:5000/user/${id}`, {
+        fetch(`https://mobile-resell-server.vercel.app/user/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -39,7 +39,7 @@ const Buyers = () => {
         <div>
             <h1 className='text-3xl text-center mt-5 font-bold text-green-500'>All buyer</h1>
             <div className="overflow-x-auto">
-  <table className="table w-full">
+  <table className="table-auto w-full">
     <thead>
       <tr>
         <th></th>
@@ -54,7 +54,7 @@ const Buyers = () => {
             <th>{i+1}</th>
         <td>{user.name}</td>
         <td>{user.email}</td>
-        <td><button className='btn btn-secondary' onClick={()=>handleDeleteUser(user._id)}>Delete</button></td>
+        <td><button className='btn-xs lg:btn lg:btn-secondary btn-secondary' onClick={()=>handleDeleteUser(user._id)}>Delete</button></td>
         </tr>)
         }
     </tbody>

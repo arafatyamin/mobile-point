@@ -55,7 +55,7 @@ const MyOrders = () => {
         <div>
             <h1>My Products</h1>
             <div className="overflow-x-auto">
-  <table className="table w-full">
+  <table className="table-auto w-full">
         <thead>
       <tr>
         <th></th>
