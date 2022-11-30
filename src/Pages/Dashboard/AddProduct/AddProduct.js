@@ -36,6 +36,10 @@ const AddProduct = () => {
         const url = `https://api.imgbb.com/1/upload?key=21faedf05bc7952fab40f5291fa76110`
         fetch(url, {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            },
             body: formData
         })
         .then(res => res.json())

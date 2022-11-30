@@ -18,9 +18,10 @@ const MyOrders = () => {
         queryKey: ['bookings', user?.email],
         queryFn: async () =>{
             const res = await fetch(url, {
-              headers: {
-                authorization: `bearer ${localStorage.getItem('accessToken')}`
-            }
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                },
             });
             const data = await res.json();
             return data;
@@ -32,8 +33,9 @@ const MyOrders = () => {
       fetch(`http://localhost:5000/booking/${booking._id}`, {
           method: 'DELETE',
           headers: {
-              authorization: `bearer ${localStorage.getItem('accessToken')}`
-          }
+            'Content-Type': 'application/json',
+            authorization: `bearer ${localStorage.getItem('accessToken')}`
+        },
       })
       .then(res => res.json())
       .then(data => {

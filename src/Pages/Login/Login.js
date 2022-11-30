@@ -1,3 +1,4 @@
+import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -7,7 +8,7 @@ import useToken from '../../Hooks/useToken';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const { signIn } = useContext(AuthContext);
+    const { signIn, providerLogUp } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
     const [logInUserEmail, setLogInUserEmail] = useState('')
     const [token] = useToken(logInUserEmail);
@@ -20,6 +21,37 @@ const Login = () => {
         navigate(from, { replace: true });
     }
 
+    const googleProvider = new GoogleAuthProvider()
+
+    const handleGoogleSignIn = () => {
+        providerLogUp(googleProvider)
+        .then(result => {
+            const res = result.user;
+            const email = res.email;
+            
+            const user = {
+                name: res.displayName,
+                email: res.email,
+                role: 'user',
+                image: res.photoURL,
+            }
+
+                fetch('http://localhost:5000/users', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(user)
+                })
+                .then(res => res.json())
+                .then(data =>{ 
+                    console.log(data)
+                    setLogInUserEmail(email)
+        
+                })
+        })
+        .catch(err => console.error(err))
+    }
     
     
 
@@ -29,6 +61,7 @@ const Login = () => {
         setLoginError('');
         signIn(email, password)
             .then(result => {
+                
                 toast.success('user login successfully')
                 setLogInUserEmail(email)
             })
@@ -76,7 +109,7 @@ const Login = () => {
                 </form>
                 <p>New to Doctors Portal <Link className='text-secondary' to="/signup">Create new Account</Link></p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
             </div>
         </div>
     );

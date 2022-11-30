@@ -3,7 +3,7 @@ import Categories from '../Categories/Categories';
 
 const Banner = () => {
     return (
-                <div className="hero lg:h-[500px]" style={{ backgroundImage: `url("https://placeimg.com/1000/800/arch")` }}>
+                <div className="hero lg:h-[500px]" style={{ backgroundImage: `url("https://i.ibb.co/jW2wzzY/arch.jpg")` }}>
                 <div className="hero-overlay bg-opacity-60">
                 </div>
                 <div className="flex text-center  h-full">

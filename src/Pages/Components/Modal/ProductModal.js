@@ -34,7 +34,7 @@ const buying = {
   sellerName,
   sellerEmail,
   productId:_id,
-  postTime: format(new Date(), "Pp"),
+  bookingTime: format(new Date(), "Pp"),
 }
 
 fetch('http://localhost:5000/booking', {

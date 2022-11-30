@@ -17,7 +17,7 @@ const Card = ({card, setProduct}) => {
                             <h2 className="card-title">resale price:{sellPrice}</h2>
                             
                             <p>used: {usedTime}</p>
-                            <p>{about}</p>
+                            <p>{about.slice(0, 100)}</p>
                             <div className="card-actions justify-end">
 
                                 <label 

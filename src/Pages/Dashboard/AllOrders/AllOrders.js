@@ -19,8 +19,9 @@ const AllOrders = () => {
         queryFn: async () =>{
             const res = await fetch(url, {
               headers: {
+                'Content-Type': 'application/json',
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
-            }
+            },
             });
             const data = await res.json();
             return data;
@@ -31,8 +32,9 @@ const AllOrders = () => {
         fetch(`http://localhost:5000/booking/${booking._id}`, {
             method: 'DELETE',
             headers: {
-                authorization: `bearer ${localStorage.getItem('accessToken')}`
-            }
+              'Content-Type': 'application/json',
+              authorization: `bearer ${localStorage.getItem('accessToken')}`
+          },
         })
         .then(res => res.json())
         .then(data => {

@@ -7,9 +7,10 @@ const Buyers = () => {
         queryKey: ['users'],
         queryFn: async()=>{
             const res = await fetch('http://localhost:5000/user',{
-                headers:{
+                headers: {
+                    'Content-Type': 'application/json',
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
-                }
+                },
             })
             const data= await res.json();
             return data;

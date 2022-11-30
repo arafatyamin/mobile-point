@@ -8,9 +8,10 @@ const Sellers = () => {
         queryKey: ['sellers'],
         queryFn: async()=>{
             const res = await fetch('http://localhost:5000/seller',{
-                headers:{
+                headers: {
+                    'Content-Type': 'application/json',
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
-                }
+                },
             })
             const data= await res.json();
             return data;
@@ -19,9 +20,10 @@ const Sellers = () => {
         const handleMakeVerify =id =>{
         fetch(`http://localhost:5000/users/admin/${id}`,{
             method: 'PUT',
-            headers:{
-            authorization: `bearer ${localStorage.getItem('accessToken')}`
-        }
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            },
         })
         .then(res =>res.json())
         .then(data =>{

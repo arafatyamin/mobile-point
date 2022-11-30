@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '../../Components/Card/Card';
+import ProductModal from '../../Components/Modal/ProductModal';
 
 const Advertises = () => {
+    const [product, setProduct] = useState('');
     const {data: advertiseProducts = [], refetch} = useQuery({
         queryKey: ['advertiseProducts'],
         queryFn: async()=>{
@@ -19,9 +21,17 @@ const Advertises = () => {
                 advertiseProducts.map(product =><Card 
                     key={product._id} 
                     card={product}
+                    setProduct={setProduct}
                     ></Card>
                     )
             }
+
+<div>
+            <ProductModal 
+            product={product}
+            setProduct={setProduct}
+            ></ProductModal>
+            </div>
         </div>
     );
 };
