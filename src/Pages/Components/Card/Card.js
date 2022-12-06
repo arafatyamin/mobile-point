@@ -7,7 +7,7 @@ const Card = ({card, setProduct}) => {
     return (
 <div className="pb-12">
             <div className="">
-                <div  className="card bg-white rounded-3xl shadow-xl">
+                <div  className="card h-screen bg-white rounded-3xl shadow-xl">
                         
                         <div className="card-body items-center text-[#2456c2]  text-center">
                         <img src={img}  alt={title} className="w-2/6" />

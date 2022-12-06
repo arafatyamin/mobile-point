@@ -7,7 +7,7 @@ const AllUsers = () => {
     const {data: users =[], refetch} = useQuery({
         queryKey: ['users'],
         queryFn: async()=>{
-            const res = await fetch('https://mobile-resell-server.vercel.app/users',{
+            const res = await fetch('http://localhost:5000/users',{
                 headers: {
                     'Content-Type': 'application/json',
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -19,7 +19,7 @@ const AllUsers = () => {
     });
     const handleDeleteUser = id => {
         console.log(id)
-        fetch(`https://mobile-resell-server.vercel.app/user/${id}`, {
+        fetch(`http://localhost:5000/user/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -40,7 +40,7 @@ const AllUsers = () => {
             <div>
             <h1 className='text-3xl text-center mt-5 font-bold text-green-500'>All Users</h1>
             <div className="overflow-x-auto">
-            <table className="table-auto w-full">
+            <table className="table-auto lg:table w-full">
                 <thead>
                 <tr>
                     <th></th>
@@ -51,9 +51,10 @@ const AllUsers = () => {
                 </thead>
                 <tbody>
                     {
-                    users.map((user,i) => <tr key={user._id}>
+                    users?.map((user,i) => <tr key={user._id}>
                         <th>{i+1}</th>
-                    <td>{user.name}</td>
+                    <td>{user
+                    .name}</td>
                     <td>{user.email}</td>
                     <td><button className='btn-sm lg:btn btn-secondary' onClick={()=>handleDeleteUser(user._id)}>Delete</button></td>
                     </tr>)

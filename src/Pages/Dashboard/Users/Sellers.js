@@ -7,7 +7,7 @@ const Sellers = () => {
     const {data: sellers =[], refetch} = useQuery({
         queryKey: ['sellers'],
         queryFn: async()=>{
-            const res = await fetch('https://mobile-resell-server.vercel.app/seller',{
+            const res = await fetch('http://localhost:5000/seller',{
                 headers: {
                     'Content-Type': 'application/json',
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -20,7 +20,7 @@ const Sellers = () => {
 
     const handleDeleteUser = id => {
         console.log(id)
-        fetch(`https://mobile-resell-server.vercel.app/user/${id}`, {
+        fetch(`http://localhost:5000/user/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -36,7 +36,7 @@ const Sellers = () => {
         })
     }
         const handleMakeVerify =id =>{
-        fetch(`https://mobile-resell-server.vercel.app/users/admin/${id}`,{
+        fetch(`http://localhost:5000/users/admin/${id}`,{
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ const Sellers = () => {
         <div>
             <h1 className='text-3xl text-center mt-5 font-bold text-green-500'>All Seller</h1>
             <div className="overflow-x-auto">
-  <table className="table-auto lg:w-full">
+  <table className="table-auto lg:table lg:text-2xl Lg:font-bold lg:w-full">
     <thead>
       <tr>
         <th></th>
@@ -69,12 +69,12 @@ const Sellers = () => {
     </thead>
     <tbody>
         {
-        sellers.map((seller,i) => <tr key={seller._id}>
+        sellers?.map((seller,i) => <tr key={seller?._id}>
             <th>{i+1}</th>
-        <td>{seller.name}</td>
-        <td>{seller.email}</td>
-        <td>{seller?.role !== 'admin' && <button onClick={()=>handleMakeVerify(seller._id)} className='btn-sm btn-success'>Make verify</button>}</td>
-        <td><button className='btn-sm btn-secondary' onClick={()=>handleDeleteUser(seller._id)}>Delete</button></td>
+        <td>{seller?.name}</td>
+        <td>{seller?.email}</td>
+        <td>{seller?.role !== 'admin' && <button onClick={()=>handleMakeVerify(seller?._id)} className='btn-sm btn-success'>Make verify</button>}</td>
+        <td><button className='btn-sm btn-secondary' onClick={()=>handleDeleteUser(seller?._id)}>Delete</button></td>
         </tr>)
         }
     </tbody>

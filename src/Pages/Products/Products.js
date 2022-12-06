@@ -13,7 +13,7 @@ const Products = () => {
     return (
         <div className="grid lg:grid-cols-3 gap-8 m-12 grid-items-center">
             {
-                products.map(card => <Card
+                products?.map(card => <Card
                 key={card._id}
                 card={card}
                 setProduct={setProduct}

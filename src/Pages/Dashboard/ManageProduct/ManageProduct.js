@@ -13,7 +13,7 @@ const ManageProduct = () => {
     const {data: manageProducts = [], loading, refetch} = useQuery({
         queryKey: ['product'],
         queryFn: async()=>{
-            const res = await fetch(`https://mobile-resell-server.vercel.app/manage/products/${user.email}`,{
+            const res = await fetch(`http://localhost:5000/manage/products/${user.email}`,{
                 headers: {
                     'Content-Type': 'application/json',
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -30,7 +30,7 @@ const ManageProduct = () => {
     }
     const handleDeleteProduct = product => {
         console.log(product)
-        fetch(`https://mobile-resell-server.vercel.app/product/${product}`, {
+        fetch(`http://localhost:5000/product/${product}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -47,7 +47,7 @@ const ManageProduct = () => {
     }
 
     const handleAdvertiseProduct = product => {
-        fetch(`https://mobile-resell-server.vercel.app/advertise`, {
+        fetch(`http://localhost:5000/advertise`, {
             method:'POST',
                     headers: {
                         'Content-Type': 'application/json',

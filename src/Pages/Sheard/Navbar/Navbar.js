@@ -18,10 +18,12 @@ const Navbar = () => {
         {
                        user?.email?  <>
                        <li><Link to="/dashboard" className="text-md font-semibold">Dashboard</Link></li>
-                       <li><Link onClick={handleLogOut} to="/" className="btn-sm btn-secondary text-lg font-semibold hover:bg-white bg-[#01cab8] hover:text-[#01cab8] text-white hover:border-2 hover:border-[#01cab8] rounded-full">LogOut</Link></li>
+                       <li className="items-center"><Link onClick={handleLogOut} to="/" className="btn-sm btn-secondary text-lg font-semibold hover:bg-white bg-[#01cab8] hover:text-[#01cab8] text-white hover:border-2 hover:border-[#01cab8] rounded-full">LogOut</Link></li>
                        <img data-tip={user?.email} className="w-10 h-10 mx-4 rounded-full tooltip tooltip-bottom" src={user?.photoURL || "https://i.ibb.co/whgZnWG/black-contour-f41038db.jpg"} alt="" />
-                       </> :<Link to="/login" className="btn-sm btn-secondary text-lg font-semibold hover:bg-white bg-[#01cab8] hover:text-[#01cab8] text-white hover:border-2 hover:border-[#01cab8] rounded-full
+                       </> : <li className="items-center">
+                       <Link to="/login" className="btn-sm btn-secondary text-lg font-semibold hover:bg-white bg-[#01cab8] hover:text-[#01cab8] text-white hover:border-2 hover:border-[#01cab8] rounded-full
                        ">LogIn</Link> 
+                       </li>
                     }
     </React.Fragment>
     return (

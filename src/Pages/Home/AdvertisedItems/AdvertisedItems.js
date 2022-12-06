@@ -10,7 +10,7 @@ const AdvertisedItems = () => {
     const {data: advertiseProducts = [], loading, refetch} = useQuery({
         queryKey: ['advertiseProducts'],
         queryFn: async()=>{
-            const res = await fetch(`https://mobile-resell-server.vercel.app/advertiseLimit`,{
+            const res = await fetch(`http://localhost:5000/advertiseLimit`,{
                 headers: {
                     'Content-Type': 'application/json',
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -29,9 +29,11 @@ const AdvertisedItems = () => {
     refetch()
     return (
         <div className="pb-12">
+            <h1 className='text-4xl text-black
+             text-center'>ads</h1>
             <div className="grid lg:grid-cols-3 gap-8 m-12 grid-items-center">
                 {
-                advertiseProducts.map(product =><Card 
+                advertiseProducts?.slice(0,3).map(product =><Card 
                     key={product._id}
                     card={product}
                     setProduct={setProduct}
@@ -40,7 +42,7 @@ const AdvertisedItems = () => {
             }
             </div>
             <div className="text-center"> 
-            <Link to="/advertises" className="btn border-0 bg-[#01cab8] text-2xl hover:text-[#01cab8] hover:bg-white hover:border-2 hover:border-[#01cab8] rounded-full">see more</Link>
+            <Link to="/advertises" className="btn border-0 bg-[#01cab8] text-2xl hover:text-[#01cab8] hover:bg-white hover:border-2 hover:border-[#01cab8] rounded-full">All Ads</Link>
             </div>
             <div>
             <ProductModal 

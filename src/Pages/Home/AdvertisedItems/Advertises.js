@@ -8,7 +8,7 @@ const Advertises = () => {
     const {data: advertiseProducts = [], refetch} = useQuery({
         queryKey: ['advertiseProducts'],
         queryFn: async()=>{
-            const res = await fetch(`https://mobile-resell-server.vercel.app/advertise`)
+            const res = await fetch(`http://localhost:5000/advertise`)
             const data = await res.json();
             return data;
         }
@@ -16,9 +16,10 @@ const Advertises = () => {
     
     refetch()
     return (
-        <div className="grid grid-cols-3">
+        <div className="grid grid-cols-3 gap-4">
+            
             {
-                advertiseProducts.map(product =><Card 
+                advertiseProducts?.map(product =><Card 
                     key={product._id} 
                     card={product}
                     setProduct={setProduct}

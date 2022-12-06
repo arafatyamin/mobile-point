@@ -37,7 +37,7 @@ const buying = {
   bookingTime: format(new Date(), "Pp"),
 }
 
-fetch('https://mobile-resell-server.vercel.app/booking', {
+fetch('http://localhost:5000/booking', {
   method: 'POST',
   headers:{
     'content-type': 'application/json'
