@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 import { CgDanger, CgAdd} from 'react-icons/cg';
 import { BsImages } from 'react-icons/bs';
 
+
 const Card = ({card, setProduct}) => {
     const {img, title,_id,postTime} = card;
     return (
             <div className="p-2" >
             <div className="card py-2 m-4 shadow-xl">
-                
             <Link to={`/categories/productDetails/${_id}`} className="">
             <figure className=" ">
-            <img src={img} alt="Shoes" className="rounded-xl h-[100px] relative" />
+            <img src={img} alt={title} className="rounded-xl h-[100px] relative" />
             <Link to='' className="text-lg text-red-500 hover:text-xl absolute top-0 left-0 tooltip" data-tip="wishList"><CgAdd /></Link>
             <Link to="" className="text-lg text-red-500 hover:text-xl absolute top-0 right-0 tooltip tooltip-warning" data-tip="report"><CgDanger /></Link>
             <Link to="" className="text-3xl font-bold text-blue-400 hover:text-4xl absolute top-50 right-50 "><BsImages /></Link>

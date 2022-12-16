@@ -11,7 +11,8 @@ const MultiCarousel = ({products,responsive,setProduct}) => {
   responsive={responsive}
   ssr={true} // means to render carousel on server-side.
   infinite={true}
-  autoPlaySpeed={1000}
+  autoPlay={true}
+  autoPlaySpeed={10000}
   keyBoardControl={true}
   customTransition="all .5"
   transitionDuration={500}
@@ -22,7 +23,7 @@ const MultiCarousel = ({products,responsive,setProduct}) => {
 >
   {
 products.map(p =>
-<div className="card h-[200px] py-2 m-4 shadow-xl">
+<div className="card h-[200px] py-2 m-4 bg-gray-100 shadow-xl">
 <figure className=" ">
   <img src={p.img} alt="Shoes" className="rounded-xl h-[100px] " />
 </figure>

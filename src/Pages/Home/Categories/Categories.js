@@ -10,7 +10,7 @@ const Categories = () => {
     },[])
     return (
         <div className="text-blue-700 h-full flex flex-col mt-10">
-            <Link to='/allmobiles' className='text-4xl font-semibold hover:link'>Mobiles</Link>
+            <Link to='/categories/smartphone' className='text-4xl font-semibold hover:link'>Smartphones</Link>
         {
                         categories?.map(category => 
                             <Link key={category._id} to={`/categories/${category._id}`} className='text-4xl font-semibold hover:link'>{category.category_name}

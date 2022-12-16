@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import Loading from '../../Components/Loading/Loading';
 import ProductModal from '../../Components/Modal/ProductModal';
 import MultiCarousel from '../../Sheard/MultiCarousel/MultiCarousel';
@@ -47,8 +46,7 @@ const AdvertisedItems = () => {
     refetch()
     return (
         <div className="pb-12">
-            <h1 className='text-4xl text-black
-             text-center'>ads</h1>
+            
 {/* product,responsive,setProduct,productModal */}
             <div className=''>
             {

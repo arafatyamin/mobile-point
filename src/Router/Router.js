@@ -34,10 +34,6 @@ const router = createBrowserRouter([
             element:<Home></Home>
         },
         {
-            path:'/allmobiles',
-            element:<AllMobiles></AllMobiles>
-        },
-        {
             path:'/blogs',
             element:<Blogs></Blogs>
         },
@@ -73,6 +69,10 @@ const router = createBrowserRouter([
             element:<Products></Products>,
             loader:({params}) => fetch(`http://localhost:5000/categories/${params.id}`)
 
+        },
+        {
+            path: '/categories/smartphone',
+            element:<AllMobiles></AllMobiles>
         },
         {
             path:'/categories/productDetails/:id',

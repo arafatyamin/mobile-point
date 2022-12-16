@@ -11,13 +11,14 @@ const AllMobiles = () => {
         .then(data => setAllMobiles(data))
     }, [setAllMobiles])
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-4">
             {
                 allMobiles.map(card => <Card
                 key={card._id}
                 card={card}
                 setProduct={setProduct}
                 ></Card>)
+                
             }
             <div>
             <ProductModal 
