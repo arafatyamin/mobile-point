@@ -21,7 +21,7 @@ const Navbar = () => {
                        <li className="items-center"><Link onClick={handleLogOut} to="/" className="btn-sm btn-secondary text-lg font-semibold hover:bg-white bg-[#01cab8] hover:text-[#01cab8] text-white hover:border-2 hover:border-[#01cab8] rounded-full">LogOut</Link></li>
                        <img data-tip={user?.email} className="w-10 h-10 mx-4 rounded-full tooltip tooltip-bottom" src={user?.photoURL || "https://i.ibb.co/whgZnWG/black-contour-f41038db.jpg"} alt="" />
                        </> : <li className="items-center">
-                       <Link to="/login" className="btn-sm btn-secondary text-lg font-semibold hover:bg-white bg-[#01cab8] hover:text-[#01cab8] text-white hover:border-2 hover:border-[#01cab8] rounded-full
+                       <Link to="/login" className="
                        ">LogIn</Link> 
                        </li>
                     }

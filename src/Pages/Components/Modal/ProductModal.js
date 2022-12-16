@@ -6,7 +6,7 @@ import { AuthContext } from "../../../contexts/AuthProvider";
 
 const ProductModal = ({product,setProduct}) => {
     console.log(product);
-  const { title, sellPrice, _id, sellerName, sellerEmail
+  const { title, sellPrice, _id, sellerName, sellerEmail, location:lc,
   } = product;
   const {user} = useContext(AuthContext);
   const location = useLocation();
@@ -65,7 +65,7 @@ navigate(from, { replace: true });
   return (
     <>
       <input type="checkbox" id="productModal" className="modal-toggle" />
-      <div className="modal">
+      <div className="modal z-[1001]">
         <div className="modal-box relative">
           <label
             htmlFor="productModal"
@@ -93,6 +93,14 @@ navigate(from, { replace: true });
               disabled
               name="name"
               placeholder="Your Name"
+              className="input input-bordered input-info w-full  mt-3"
+            />
+            <input
+              type="text"
+              defaultValue={lc}
+              disabled
+              name="location"
+              placeholder="buyer location"
               className="input input-bordered input-info w-full  mt-3"
             />
             <input

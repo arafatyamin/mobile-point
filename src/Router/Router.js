@@ -16,12 +16,18 @@ import ManageProduct from "../Pages/Dashboard/ManageProduct/ManageProduct";
 import PrivateRoute from "./PrivateRoute";
 import AllUsers from "../Pages/Dashboard/Users/AllUsers";
 import Advertises from "../Pages/Home/AdvertisedItems/Advertises";
+import Payment from "../Pages/Dashboard/Payment/Payment";
+import DisplayError from "../Pages/Sheard/DisplayError/DisplayError";
+import CategoriesLayout from "../Pages/Home/Categories/CategoriesLayout";
+import Banner from "../Pages/Home/Banner/Banner";
+import ProductViewModal from "../Pages/Sheard/ProductViewModal/ProductViewModal";
 
 
 const router = createBrowserRouter([
 {
     path:'/',
     element:<Root></Root>,
+    errorElement: <DisplayError></DisplayError>,
     children: [
         {
             path:'/',
@@ -39,12 +45,7 @@ const router = createBrowserRouter([
             path:'/advertises',
             element:<Advertises></Advertises>
         },
-        {
-            path:'/categories/:id',
-            element:<Products></Products>,
-            loader:({params}) => fetch(`http://localhost:5000/categories/${params.id}`)
-
-        },
+        
         
         {
             path:'/login',
@@ -60,8 +61,30 @@ const router = createBrowserRouter([
     ]
 },
 {
+    path:'/categories',
+    element: <CategoriesLayout></CategoriesLayout>,
+    children: [
+        {
+            path:'/categories',
+            element: <Banner></Banner>
+        },
+        {
+            path:'/categories/:id',
+            element:<Products></Products>,
+            loader:({params}) => fetch(`http://localhost:5000/categories/${params.id}`)
+
+        },
+        {
+            path:'/categories/productDetails/:id',
+            element:<ProductViewModal></ProductViewModal>,
+            loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
+        }
+    ]
+},
+{
     path:'/dashboard',
     element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+    errorElement: <DisplayError></DisplayError>,
     children: [
         {
             path:'/dashboard',
@@ -91,6 +114,11 @@ const router = createBrowserRouter([
             path:'/dashboard/manageproduct',
             element: <ManageProduct></ManageProduct>, 
         },
+        {
+            path:'/dashboard/payment/:id',
+            element: <Payment></Payment>,
+            loader: ({params}) => fetch(`http://localhost:5000/booking/${params.id}`)
+        }
         
     ]
 },

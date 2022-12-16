@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Card from '../../Components/Card/Card';
 import Loading from '../../Components/Loading/Loading';
 import ProductModal from '../../Components/Modal/ProductModal';
+import MultiCarousel from '../../Sheard/MultiCarousel/MultiCarousel';
+
 
 const AdvertisedItems = () => {
     const [product, setProduct] = useState('');
@@ -20,6 +21,23 @@ const AdvertisedItems = () => {
             return data;
         }
     })
+    const responsive = {
+        desktop: {
+          breakpoint: { max: 3000, min: 1024 },
+          items: 3,
+          slidesToSlide: 4 // optional, default to 1.
+        },
+        tablet: {
+          breakpoint: { max: 1024, min: 464 },
+          items: 2,
+          slidesToSlide: 2 // optional, default to 1.
+        },
+        mobile: {
+          breakpoint: { max: 464, min: 0 },
+          items: 1,
+          slidesToSlide: 1 // optional, default to 1.
+        }
+      };
 
     console.log(advertiseProducts);
 
@@ -31,18 +49,15 @@ const AdvertisedItems = () => {
         <div className="pb-12">
             <h1 className='text-4xl text-black
              text-center'>ads</h1>
-            <div className="grid lg:grid-cols-3 gap-8 m-12 grid-items-center">
-                {
-                advertiseProducts?.slice(0,3).map(product =><Card 
-                    key={product._id}
-                    card={product}
-                    setProduct={setProduct}
-                    ></Card>
-                )
-            }
-            </div>
-            <div className="text-center"> 
-            <Link to="/advertises" className="btn border-0 bg-[#01cab8] text-2xl hover:text-[#01cab8] hover:bg-white hover:border-2 hover:border-[#01cab8] rounded-full">All Ads</Link>
+{/* product,responsive,setProduct,productModal */}
+            <div className=''>
+            {
+            <MultiCarousel
+            products={advertiseProducts}
+            responsive={responsive}
+            setProduct={setProduct}
+            ></MultiCarousel>
+                }
             </div>
             <div>
             <ProductModal 

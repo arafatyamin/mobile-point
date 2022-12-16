@@ -103,7 +103,7 @@ const AddProduct = () => {
                         <label className="label">
                             <span className="label-text">original price</span>
                         </label>
-                        <input type="text" {...register("originalPrice", {
+                        <input type="number" {...register("originalPrice", {
                             required: true
                         })} className="input input-bordered" />
                     </div>
@@ -111,7 +111,7 @@ const AddProduct = () => {
                         <label className="label">
                             <span className="label-text">sell price</span>
                         </label>
-                        <input type="text" {...register("sellPrice", {
+                        <input type="number" {...register("sellPrice", {
                             required: true
                         })} className="input input-bordered" />
                     </div>

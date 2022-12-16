@@ -1,20 +1,22 @@
 import React from 'react';
 import AdvertisedItems from '../AdvertisedItems/AdvertisedItems';
-import Banner from '../Banner/Banner';
-import Carousel from '../Carousel/Carousel';
+import Categories from '../Categories/Categories';
 
 const Home = () => {
     
     return (
         <div>
             <div>
-                <div className=""><Banner /></div>
-                <div className="my-10"><AdvertisedItems></AdvertisedItems></div>
-                <div>
-                    <Carousel></Carousel>
+                <div className="w-full flex">
+                <div className="w-1/4 rounded-lg h-full">
+                    <Categories></Categories>
+                    </div>
+                <div className="w-3/4 rounded-lg h-full
+                ">
+                    <AdvertisedItems></AdvertisedItems>
+                </div>
                 </div>
             </div>
-            
         </div>
     );
 };

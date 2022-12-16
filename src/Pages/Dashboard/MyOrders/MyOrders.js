@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import ConfirmationModal from '../../Components/ConfirmationModal/ConfirmationModal';
 import Loading from '../../Components/Loading/Loading';
@@ -46,7 +47,7 @@ const MyOrders = () => {
           }
       })
   }
-
+  console.log(bookings);
   if(isLoading){
       return <Loading></Loading>
   }
@@ -63,8 +64,9 @@ const MyOrders = () => {
         <th>Name</th>
         <th>Product</th>
         <th>email</th>
-        <th>address</th>
-        <th></th>
+        <th>price</th>
+        <th>status</th>
+        <th>action</th>
       </tr>
     </thead>
     <tbody>
@@ -75,10 +77,28 @@ const MyOrders = () => {
             <td>{booking.buyerName}</td>
             <td>{booking.productName}</td>
             <td>{booking.email}</td>
-            <td>{booking.address}</td>
-            <td><label 
-                        onClick={() => setDeletingOrder(booking)} 
-                        htmlFor="confirmation-modal" className="btn btn-xs">delete</label></td>
+            <td>${booking.sellPrice}</td>
+            <td>
+                {
+                    booking.sellPrice && !booking.paid && <Link 
+                    to={`/dashboard/payment/${booking._id}`} 
+                     className='btn sm:btn-xs mr-1  btn-primary'
+                    >Pay</Link>
+                }
+                {
+                     booking.paid && <span 
+                    className='text-white btn btn-success btn-sm'>
+                        paid
+                    </span>
+                }
+                </td>
+                <td>
+                {
+                    !booking.paid && <label 
+                    onClick={() => setDeletingOrder(booking)} 
+                    htmlFor="confirmation-modal" className="btn sm:btn-xs">delete</label>
+                }
+                </td>
           </tr>)
      }
       
