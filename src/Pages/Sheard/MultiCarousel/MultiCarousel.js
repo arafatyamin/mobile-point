@@ -5,7 +5,7 @@ import "react-multi-carousel/lib/styles.css";
 const MultiCarousel = ({products,responsive,setProduct}) => {
     return (
             <Carousel
-  swipeable={false}
+  swipeable={true}
   draggable={false}
   showDots={true}
   responsive={responsive}
@@ -23,17 +23,18 @@ const MultiCarousel = ({products,responsive,setProduct}) => {
 >
   {
 products.map(p =>
-<div className="card h-[200px] py-2 m-4 bg-gray-100 shadow-xl">
-<figure className=" ">
-  <img src={p.img} alt="Shoes" className="rounded-xl h-[100px] " />
+<div className="card  my-10 w-[250px] h-[300px] gap-4 hover:shadow-xl">
+<figure className=" mx-3">
+  <img src={p.img} alt={p.title} className=" h-[192px]" />
 </figure>
 <div className="card-body p-0 items-center text-center">
-  <h2 className="card-title">{p.title}</h2>
+  <h2 className="card-title">{p.title.slice(0,20)}</h2>
+<p>price:{p.sellPrice}</p>
   <div className="card-actions">
     <label 
     htmlFor="productModal"
     onClick={() =>setProduct(p)}
-    className="flex items-center btn-sm rounded-lg text-white font-bold bg-[#3a9dd5]">Buy Now</label>
+    className="flex items-center rounded-lg text-gray-700 link-hover font-bold">view details</label>
   </div>
 </div>
 </div>

@@ -4,16 +4,15 @@ import { Link } from 'react-router-dom';
 const Categories = () => {
     const [categories, setCategories] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/categories')
+        fetch('https://mobile-resell-server.vercel.app/categories')
         .then(res => res.json())
         .then(data => setCategories(data))
     },[])
     return (
-        <div className="text-blue-700 h-full flex flex-col mt-10">
-            <Link to='/categories/smartphone' className='text-4xl font-semibold hover:link'>Smartphones</Link>
+        <div className="text-blue-700 h-full flex flex-col ml-10">
         {
                         categories?.map(category => 
-                            <Link key={category._id} to={`/categories/${category._id}`} className='text-4xl font-semibold hover:link'>{category.category_name}
+                            <Link key={category._id} to={`/categories/${category._id}`} className='text-lg text-start lg:text-xl font-semibold hover:link'>{category.category_name}
                             </Link>
                         )
                         }

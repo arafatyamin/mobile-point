@@ -7,7 +7,7 @@ const AllUsers = () => {
     const {data: users =[], refetch} = useQuery({
         queryKey: ['users'],
         queryFn: async()=>{
-            const res = await fetch('http://localhost:5000/users',{
+            const res = await fetch('https://mobile-resell-server.vercel.app/users',{
                 headers: {
                     'Content-Type': 'application/json',
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -19,7 +19,7 @@ const AllUsers = () => {
     });
     const handleDeleteUser = id => {
         console.log(id)
-        fetch(`http://localhost:5000/user/${id}`, {
+        fetch(`https://mobile-resell-server.vercel.app/user/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -37,26 +37,28 @@ const AllUsers = () => {
 
     return (
         <div>
-            <div>
             <h1 className='text-3xl text-center mt-5 font-bold text-green-500'>All Users</h1>
-            <div className="overflow-x-auto">
-            <table className="table-auto lg:table w-full">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Delete</th>
+            <div className="flex items-center justify-center">
+            <div className="container">
+            <table className="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
+                <thead className='text-white'>
+                <tr className="bg-teal-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                    <th className="p-3 text-left"></th>
+                    <th className="p-3 text-left">Name</th>
+                    <th className="p-3 text-left">Email</th>
+                    <th className="p-3 text-left">Delete</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody className="flex-1 sm:flex-none">
                     {
-                    users?.map((user,i) => <tr key={user._id}>
+                    users?.map((user,i) => <tr key={user._id}
+                    className="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0"
+                    >
                         <th>{i+1}</th>
-                    <td>{user
+                    <td className="border-grey-light border hover:bg-gray-100 p-3">{user
                     .name}</td>
-                    <td>{user.email}</td>
-                    <td><button className='btn-sm lg:btn btn-secondary' onClick={()=>handleDeleteUser(user._id)}>Delete</button></td>
+                    <td className="border-grey-light border hover:bg-gray-100 p-3">{user.email}</td>
+                    <td className="border-grey-light border hover:bg-gray-100 p-3"><button className='btn-sm lg:btn btn-secondary' onClick={()=>handleDeleteUser(user._id)}>Delete</button></td>
                     </tr>)
                     }
                 </tbody>

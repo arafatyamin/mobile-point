@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import ConfirmationModal from '../../Components/ConfirmationModal/ConfirmationModal';
 import Loading from '../../Components/Loading/Loading';
+import  './MyOrders.css';
 
 const MyOrders = () => {
   const [deletingOrder, setDeletingOrder] = useState(null)
@@ -13,7 +14,7 @@ const MyOrders = () => {
     }
     const {user} = useContext(AuthContext);
 
-    const url = `http://localhost:5000/myOrder?email=${user?.email}`;
+    const url = `https://mobile-resell-server.vercel.app/myOrder?email=${user?.email}`;
 
     const {data: bookings = [], isLoading, refetch} = useQuery({
         queryKey: ['bookings', user?.email],
@@ -31,7 +32,7 @@ const MyOrders = () => {
 
 
     const handleDeleteOrder = booking => {
-      fetch(`http://localhost:5000/booking/${booking._id}`, {
+      fetch(`https://mobile-resell-server.vercel.app/booking/${booking._id}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
@@ -54,57 +55,64 @@ const MyOrders = () => {
 
     return (
         <div>
-            <h1>My Products</h1>
-            <div className="overflow-x-auto">
-  <table className="table-auto
-   lg:table w-full">
-        <thead>
-      <tr>
-        <th></th>
-        <th>Name</th>
-        <th>Product</th>
-        <th>email</th>
-        <th>price</th>
-        <th>status</th>
-        <th>action</th>
+        <h1>My Products</h1>
+        
+     {
+        bookings.map((booking, i) =>
+        <div key={booking._id} className="flex items-center justify-center">
+            
+            <div className="container">
+  <table className="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
+        <thead className='text-white'>
+      <tr className="bg-teal-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+        <th className="p-3 text-left"></th>
+        <th className="p-3 text-left">Name</th>
+        <th className="p-3 text-left">Product</th>
+        <th className="p-3 text-left">email</th>
+        <th className="p-3 text-left">price</th>
+        <th className="p-3 text-left">status</th>
+        <th className="p-3 text-left">action</th>
       </tr>
     </thead>
-    <tbody>
-      
-     {
-        bookings.map((booking, i) => <tr key={booking._id}>
-            <th>{i+1}</th>
-            <td>{booking.buyerName}</td>
-            <td>{booking.productName}</td>
-            <td>{booking.email}</td>
-            <td>${booking.sellPrice}</td>
-            <td>
+    <tbody className="flex-1 sm:flex-none">
+        <tr 
+        className="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0"
+        >
+            <td className="border-grey-light border hover:bg-gray-100 p-3">{i+1}</td>
+            <td className="border-grey-light border hover:bg-gray-100 p-3">{booking.buyerName}</td>
+            <td className="border-grey-light border hover:bg-gray-100 p-3">{booking.productName}</td>
+            <td className="border-grey-light border hover:bg-gray-100 p-3">{booking.email}</td>
+            <td className="border-grey-light border hover:bg-gray-100 p-3">${booking.sellPrice}</td>
+            <td className="border-grey-light border hover:bg-gray-100 p-3">
                 {
                     booking.sellPrice && !booking.paid && <Link 
                     to={`/dashboard/payment/${booking._id}`} 
-                     className='btn sm:btn-xs mr-1  btn-primary'
+                     className='lg:btn btn-sm mr-1  btn-primary'
                     >Pay</Link>
                 }
                 {
                      booking.paid && <span 
-                    className='text-white btn btn-success btn-sm'>
+                    className='lg:btn text-white btn-success btn-sm'>
                         paid
                     </span>
                 }
+                
                 </td>
-                <td>
-                {
+                <td className="border-grey-light border hover:bg-gray-100 p-3">
+            {
                     !booking.paid && <label 
                     onClick={() => setDeletingOrder(booking)} 
-                    htmlFor="confirmation-modal" className="btn sm:btn-xs">delete</label>
+                    htmlFor="confirmation-modal" className="lg:btn btn-warning btn-sm">delete</label>
                 }
-                </td>
-          </tr>)
-     }
-      
+            </td>
+          </tr>
+          
     </tbody>
   </table>
 </div>
+</div>)
+     }
+      
 {
                 deletingOrder && <ConfirmationModal
                 title={`Are you sure you want to delete?`}
@@ -115,8 +123,8 @@ const MyOrders = () => {
                 closeModal = {closeModal}
                 ></ConfirmationModal>
             } 
+        
         </div>
-
     );
 };
 

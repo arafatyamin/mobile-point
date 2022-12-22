@@ -10,7 +10,7 @@ const AdvertisedItems = () => {
     const {data: advertiseProducts = [], loading, refetch} = useQuery({
         queryKey: ['advertiseProducts'],
         queryFn: async()=>{
-            const res = await fetch(`http://localhost:5000/advertiseLimit`,{
+            const res = await fetch(`https://mobile-resell-server.vercel.app/advertiseLimit`,{
                 headers: {
                     'Content-Type': 'application/json',
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -23,30 +23,27 @@ const AdvertisedItems = () => {
     const responsive = {
         desktop: {
           breakpoint: { max: 3000, min: 1024 },
-          items: 3,
-          slidesToSlide: 4 // optional, default to 1.
+          items: 4,
+          slidesToSlide: 3 // optional, default to 1.
         },
         tablet: {
           breakpoint: { max: 1024, min: 464 },
-          items: 2,
+          items: 3,
           slidesToSlide: 2 // optional, default to 1.
         },
         mobile: {
           breakpoint: { max: 464, min: 0 },
-          items: 1,
+          items: 2,
           slidesToSlide: 1 // optional, default to 1.
         }
       };
-
-    console.log(advertiseProducts);
-
     if(loading){
        return <Loading />
     }
     refetch()
     return (
         <div className="pb-12">
-            
+            <h2 className="text-3xl text-center pt-2">FlashSale</h2>
 {/* product,responsive,setProduct,productModal */}
             <div className=''>
             {

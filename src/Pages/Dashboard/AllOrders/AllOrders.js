@@ -12,7 +12,7 @@ const AllOrders = () => {
     // }
     const {user} = useContext(AuthContext);
 
-    const url = `http://localhost:5000/bookings/${user?.email}`;
+    const url = `https://mobile-resell-server.vercel.app/bookings/${user?.email}`;
 
     const {data: bookings = [], isLoading} = useQuery({
         queryKey: ['bookings', user?.email],
@@ -29,7 +29,7 @@ const AllOrders = () => {
     })
 
     // const handleDeleteOrder = booking => {
-    //     fetch(`http://localhost:5000/booking/${booking._id}`, {
+    //     fetch(`https://mobile-resell-server.vercel.app/booking/${booking._id}`, {
     //         method: 'DELETE',
     //         headers: {
     //           'Content-Type': 'application/json',

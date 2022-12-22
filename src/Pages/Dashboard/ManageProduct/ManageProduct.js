@@ -13,7 +13,7 @@ const ManageProduct = () => {
     const {data: manageProducts = [], loading, refetch} = useQuery({
         queryKey: ['product'],
         queryFn: async()=>{
-            const res = await fetch(`http://localhost:5000/manage/products/${user.email}`,{
+            const res = await fetch(`https://mobile-resell-server.vercel.app/manage/products/${user.email}`,{
                 headers: {
                     'Content-Type': 'application/json',
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -30,7 +30,7 @@ const ManageProduct = () => {
     }
     const handleDeleteProduct = product => {
         console.log(product)
-        fetch(`http://localhost:5000/product/${product}`, {
+        fetch(`https://mobile-resell-server.vercel.app/product/${product}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -47,13 +47,34 @@ const ManageProduct = () => {
     }
 
     const handleAdvertiseProduct = product => {
-        fetch(`http://localhost:5000/advertise`, {
+        const { _id,title,sellPrice,sellerNeme,sellerEmail,category_id,img,about,phone,condition,sellerStatus,postTime,usedTime,originalPrice,location, }= product;
+
+        const advertise = {
+            _id,
+            title,
+            sellPrice,
+            sellerNeme,
+            sellerEmail,
+             phone,
+             category_id,
+             img,
+             productId:_id,
+             about,
+             location,
+             originalPrice,
+             usedTime,
+             postTime,
+             sellerStatus,
+             condition,
+           }
+
+        fetch(`https://mobile-resell-server.vercel.app/advertise`, {
             method:'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     },
-                    body: JSON.stringify(product)
+                    body: JSON.stringify(advertise)
                 })
                 .then(res => res.json())
                 .then(result => {

@@ -67,7 +67,7 @@ const router = createBrowserRouter([
         {
             path:'/categories/:id',
             element:<Products></Products>,
-            loader:({params}) => fetch(`http://localhost:5000/categories/${params.id}`)
+            loader:({params}) => fetch(`https://mobile-resell-server.vercel.app/categories/${params.id}`)
 
         },
         {
@@ -77,7 +77,7 @@ const router = createBrowserRouter([
         {
             path:'/categories/productDetails/:id',
             element:<ProductViewModal></ProductViewModal>,
-            loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
+            loader: ({params}) => fetch(`https://mobile-resell-server.vercel.app/products/${params.id}`)
         }
     ]
 },
@@ -117,7 +117,7 @@ const router = createBrowserRouter([
         {
             path:'/dashboard/payment/:id',
             element: <Payment></Payment>,
-            loader: ({params}) => fetch(`http://localhost:5000/booking/${params.id}`)
+            loader: ({params}) => fetch(`https://mobile-resell-server.vercel.app/booking/${params.id}`)
         }
         
     ]

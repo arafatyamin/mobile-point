@@ -5,29 +5,27 @@ import { BsImages } from 'react-icons/bs';
 
 
 const Card = ({card, setProduct}) => {
-    const {img, title,_id,postTime} = card;
+    const {img, title,_id,postTime,sellPrice,originalPrice} = card;
     return (
-            <div className="p-2" >
-            <div className="card py-2 m-4 shadow-xl">
+            <div className="card  my-10 w-[250px] h-[350px] gap-4 hover:shadow-xl">
             <Link to={`/categories/productDetails/${_id}`} className="">
             <figure className=" ">
-            <img src={img} alt={title} className="rounded-xl h-[100px] relative" />
-            <Link to='' className="text-lg text-red-500 hover:text-xl absolute top-0 left-0 tooltip" data-tip="wishList"><CgAdd /></Link>
-            <Link to="" className="text-lg text-red-500 hover:text-xl absolute top-0 right-0 tooltip tooltip-warning" data-tip="report"><CgDanger /></Link>
+            <img src={img} alt={title} className="rounded-xl h-[192px] pt-4 relative" />
+            <Link to='' className="text-lg text-red-500 hover:text-xl absolute top-2 left-2 tooltip" data-tip="wishList"><CgAdd /></Link>
+            <Link to="" className="text-lg text-red-500 hover:text-xl absolute top-2 right-2 tooltip tooltip-warning" data-tip="report"><CgDanger /></Link>
             <Link to="" className="text-3xl font-bold text-blue-400 hover:text-4xl absolute top-50 right-50 "><BsImages /></Link>
             </figure>
             <div className="card-body p-0 items-center text-center">
             <h3>{postTime.split(',',1)}</h3>
-            <h2 className="card-title">{title}</h2> 
-            <div className="card-actions">
+            <h2 className="card-title">{title.slice(0,20)}</h2> 
+            <p className="line-through">price: ${originalPrice}</p>
+            <p className="">price: ${sellPrice}</p>
                 <label 
                 htmlFor="productModal"
                 onClick={() =>setProduct(card)}
-                className="flex items-center btn-sm rounded-lg text-white font-bold bg-[#3a9dd5]">Buy Now</label>
-            </div>
+                className="flex items-center rounded-lg text-gray-600 link-hover font-bold">view details</label>
             </div>
             </Link>
-            </div>
             </div>
     );
 };

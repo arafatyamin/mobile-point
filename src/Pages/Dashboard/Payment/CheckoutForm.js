@@ -10,12 +10,12 @@ const CheckoutForm = ({booking}) => {
     const stripe = new useStripe();
     const elements = new useElements();
     const [clientSecret, setClientSecret] = useState("");
-    const {sellPrice, email,buyerName, _id} = booking;
+    const {sellPrice, email,buyerName, productId} = booking;
 
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://mobile-resell-server.vercel.app/create-payment-intent", {
           method: "POST",
           headers: { 
             "Content-Type": "application/json",
@@ -81,9 +81,10 @@ const CheckoutForm = ({booking}) => {
                 sellPrice,
                 email,
                 transactionId: paymentIntent.id,
-                bookingId: _id,
+                bookingId: productId,
             }
-            fetch('http://localhost:5000/payments', {
+            console.log(productId)
+            fetch('https://mobile-resell-server.vercel.app/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',

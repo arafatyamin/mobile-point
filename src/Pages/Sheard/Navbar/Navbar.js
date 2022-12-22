@@ -18,7 +18,7 @@ const Navbar = () => {
     // loading all product
     const [allProducts, setAllProducts] = useState([])
     useEffect(() =>{
-        fetch('http://localhost:5000/products')
+        fetch('https://mobile-resell-server.vercel.app/products')
         .then(res => res.json())
         .then(data => setAllProducts(data))
     }, [setAllProducts])

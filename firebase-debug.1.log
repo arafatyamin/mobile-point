@@ -1,0 +1,23 @@
+[debug] [2022-12-18T00:13:00.428Z] ----------------------------------------------------------------------
+[debug] [2022-12-18T00:13:00.430Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\13405\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only hosting:mobilebikroy-point
+[debug] [2022-12-18T00:13:00.430Z] CLI Version:   11.18.0
+[debug] [2022-12-18T00:13:00.430Z] Platform:      win32
+[debug] [2022-12-18T00:13:00.431Z] Node Version:  v18.9.1
+[debug] [2022-12-18T00:13:00.431Z] Time:          Sun Dec 18 2022 06:13:00 GMT+0600 (Bangladesh Standard Time)
+[debug] [2022-12-18T00:13:00.432Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-12-18T00:13:00.598Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-12-18T00:13:00.599Z] > authorizing via signed-in user (powerboyyamin@gmail.com)
+[debug] [2022-12-18T00:13:00.600Z] [iam] checking project mobilebikroypoint for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-12-18T00:13:00.603Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/mobilebikroypoint:testIamPermissions [none]
+[debug] [2022-12-18T00:13:00.603Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/mobilebikroypoint:testIamPermissions x-goog-quota-user=projects/mobilebikroypoint
+[debug] [2022-12-18T00:13:00.604Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/mobilebikroypoint:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-12-18T00:13:02.472Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/mobilebikroypoint:testIamPermissions 200
+[debug] [2022-12-18T00:13:02.473Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/mobilebikroypoint:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-12-18T00:13:02.476Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/mobilebikroypoint [none]
+[debug] [2022-12-18T00:13:23.581Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects/mobilebikroypoint
+[debug] [2022-12-18T00:13:23.585Z] FirebaseError: Failed to make request to https://firebase.googleapis.com/v1beta1/projects/mobilebikroypoint
+    at RetryOperation._fn (C:\Users\13405\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:242:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to get Firebase project mobilebikroypoint. Please make sure the project exists and your account has permission to access it.
