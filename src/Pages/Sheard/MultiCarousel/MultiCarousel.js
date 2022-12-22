@@ -1,10 +1,19 @@
 import React from 'react';
+import { useContext } from 'react';
 import Carousel from 'react-multi-carousel';
 import "react-multi-carousel/lib/styles.css";
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthProvider';
 
 const MultiCarousel = ({products,responsive,setProduct}) => {
+  const {user} = useContext(AuthContext);
     return (
-            <Carousel
+
+      <div style={{
+        paddingBottom: '30px',
+        position: 'relative'
+      }}>
+        <Carousel
   swipeable={true}
   draggable={false}
   showDots={true}
@@ -31,16 +40,20 @@ products.map(p =>
   <h2 className="card-title">{p.title.slice(0,20)}</h2>
 <p>price:{p.sellPrice}</p>
   <div className="card-actions">
-    <label 
-    htmlFor="productModal"
-    onClick={() =>setProduct(p)}
-    className="flex items-center rounded-lg text-gray-700 link-hover font-bold">view details</label>
+    {user?
+      <label 
+      htmlFor="productModal"
+      onClick={() =>setProduct(p)}
+      className="flex items-center rounded-lg text-gray-700 link-hover font-bold">buy now</label>:
+      <Link to="/login" className='link link-info text-xl '>logIn</Link>
+    }
   </div>
 </div>
 </div>
 )
 }
-</Carousel>
+      </Carousel>
+      </div>
     );
 };
 
