@@ -28,12 +28,12 @@ const AdvertisedItems = () => {
         },
         tablet: {
           breakpoint: { max: 1024, min: 464 },
-          items: 3,
+          items: 2,
           slidesToSlide: 2 // optional, default to 1.
         },
         mobile: {
           breakpoint: { max: 464, min: 0 },
-          items: 2,
+          items: 1,
           slidesToSlide: 1 // optional, default to 1.
         }
       };
@@ -42,10 +42,10 @@ const AdvertisedItems = () => {
     }
     refetch()
     return (
-        <div className="pb-12">
+        <div className="pb-12 w-full">
             <h2 className="text-3xl text-center pt-2">FlashSale</h2>
 {/* product,responsive,setProduct,productModal */}
-            <div className=''>
+            <div className='w-full'>
             {
             <MultiCarousel
             products={advertiseProducts}

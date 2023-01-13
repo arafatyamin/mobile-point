@@ -67,7 +67,7 @@ const Login = () => {
             })
             .catch(error => {
                 console.log(error.message)
-                setLoginError(error.message);
+                setLoginError(error.message.split('/')[1]);
             });
     }
 
@@ -75,7 +75,7 @@ const Login = () => {
 
 
 
-
+console.log(loginError)
 
     return (
         <div className='h-[800px] flex justify-center items-center'>
@@ -103,8 +103,8 @@ const Login = () => {
                         {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
                     </div>
                     <input className='btn btn-accent w-full' value="Login" type="submit" />
-                    <div>
-                        {loginError && <p className='text-red-600'>{loginError}</p>}
+                    <div className='text-center'>
+                        {loginError && <p className='text-red-600 text-xl'>{loginError.split(')')[0]}</p>}
                     </div>
                 </form>
                 <p>New to Doctors Portal <Link className='text-secondary' to="/signup">Create new Account</Link></p>

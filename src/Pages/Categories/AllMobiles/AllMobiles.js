@@ -16,7 +16,7 @@ const AllMobiles = () => {
     return (
         <div>
             <h2 className="text-4xl text-center">All Products</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ml-10 lg:mx-4">
             {
                 allMobiles.map(card => <Card
                 key={card._id}
