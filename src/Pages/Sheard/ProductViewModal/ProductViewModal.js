@@ -11,7 +11,7 @@ const ProductViewModal = () => {
         
         ">
 
-<div className='flex flex-col justify-center items-center rounded-b-full bg-gray-400 w-8 md:w-10 lg:w-12 gap-4 mt-4 fixed top-[50%] z-0 left-[30%]'
+<div className='flex flex-col justify-center items-center rounded-b-full bg-gray-400 w-8 md:w-10 lg:w-12 gap-4 mt-4 fixed top-[50%] z-0 left-0 lg:left-[30%]'
         >
         <Link to='' className="pt-2 text-2xl text-red-500 hover:text-blue-400 tooltip" data-tip="wishList"><CgAdd /></Link>
             <Link to="" className="pb-2 text-2xl text-red-500 hover:text-blue-400 tooltip tooltip-warning" data-tip="report"><CgDanger /></Link>
@@ -22,7 +22,7 @@ const ProductViewModal = () => {
         
 
 
-<table class="table-auto table-zebra w-full mx-auto text-xl my-4">
+<table class="table-auto table-zebra w-full ml-3 text-xl my-4">
   <tbody>
     <tr>
       <td>Post Time</td>

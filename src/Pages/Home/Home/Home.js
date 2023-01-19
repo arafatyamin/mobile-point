@@ -12,7 +12,7 @@ const Home = () => {
     console.log(darkMode)
     return (
         <div className={`${darkMode && 'bg-gray-400 text-white'}`}>
-            <div className="w-full md:hidden h-[120px] 
+            <div className="w-full md:hidden h-[160px] 
                 ">
                     <Carousel />
             </div>

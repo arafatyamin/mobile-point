@@ -31,13 +31,13 @@ const Carousel = () => {
             :
             setSelectedImg(images?.length -1)
             
-            }} className="btn btn-circle">❮</Link> 
+            }} className="md:btn md:btn-circle text-3xl text-white">❮</Link> 
           <Link onClick={()=>{
             selectedImg < images?.length -1 ? setSelectedImg(selectedImg + 1)
             :
             setSelectedImg(0)
 
-             }} className="btn btn-circle">❯</Link>
+             }} className="md:btn md:btn-circle text-3xl text-white">❯</Link>
         </div>
       </div> 
       

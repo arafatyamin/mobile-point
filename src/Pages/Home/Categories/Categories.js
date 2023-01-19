@@ -9,7 +9,7 @@ const Categories = () => {
         .then(data => setCategories(data))
     },[])
     return (
-        <div className="text-blue-700 h-full grid grid-cols-4 md:grid-cols-4 lg:flex gap-4 lg:flex-cols-3 mx-6">
+        <div className="text-blue-700 h-full grid grid-cols-4 lg:grid-cols-1  gap-4 lg:flex-cols-3 mx-6">
         {
                         categories?.map(category => 
                             <Link key={category?._id} to={`/categories/${category._id}`} className='flex gap-4 w-full h-full text-lg text-start lg:text-xl font-semibold hover:link'>{category.category_name}
