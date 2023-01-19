@@ -25,14 +25,15 @@ import ProductViewModal from "../Pages/Sheard/ProductViewModal/ProductViewModal"
 
 const router = createBrowserRouter([
 {
+        path:'/',
+        element:<Home></Home>
+},
+{
     path:'/',
     element:<Root></Root>,
     errorElement: <DisplayError></DisplayError>,
     children: [
-        {
-            path:'/',
-            element:<Home></Home>
-        },
+        
         {
             path:'/blogs',
             element:<Blogs></Blogs>

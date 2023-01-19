@@ -34,7 +34,7 @@ const MultiCarousel = ({products,responsive,setProduct}) => {
 >
   {
 products.map(p =>
-<div className="card  my-10 w-full lg:w-[250px] lg:h-[300px] gap-4 hover:shadow-xl">
+<div key={p._id} className="card  my-10 w-full lg:w-[250px] lg:h-[300px] gap-4 hover:shadow-xl">
 <figure className=" mx-3">
   <img src={p.img} alt={p.title} className=" h-[192px]" />
 </figure>

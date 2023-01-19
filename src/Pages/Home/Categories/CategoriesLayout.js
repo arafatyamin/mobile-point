@@ -8,8 +8,8 @@ const CategoriesLayout = () => {
     return (
         <div className="w-full">
             <Navbar></Navbar>
-            <div className="w-full md:flex">
-            <div className="md:w-1/5 bg-gray-200 lg:px-3 shadow-xl rounded-lg h-full" >
+            <div className="lg:flex">
+            <div className="w-full lg:w-1/5 lg:py-4 bg-gray-200 shadow-xl rounded-lg h-full" >
             <Categories></Categories>
             </div>
             <div className="w-full rounded-lg h-full

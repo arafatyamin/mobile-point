@@ -5,7 +5,7 @@ import Navbar from '../Pages/Sheard/Navbar/Navbar';
 
 const Root = () => {
     return (
-        <div>
+        <div className=''>
             <Navbar></Navbar>
             <Outlet></Outlet>
             <Footer></Footer>

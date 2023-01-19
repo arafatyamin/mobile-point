@@ -20,7 +20,7 @@ const Advertises = () => {
             
             {
                 advertiseProducts?.map(product => !product.paid && <Card 
-                    key={product._id} 
+                    key={product?._id} 
                     card={product}
                     setProduct={setProduct}
                     ></Card>

@@ -5,7 +5,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
 const ProductModal = ({product,setProduct}) => {
-    console.log(product);
   const { title, sellPrice, _id, sellerName, sellerEmail, location:lc,
   } = product;
   const {user} = useContext(AuthContext);

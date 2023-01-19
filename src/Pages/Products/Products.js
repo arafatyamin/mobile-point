@@ -11,10 +11,10 @@ const Products = () => {
     
 
     return (
-        <div className="grid lg:grid-cols-3 gap-8 m-12 grid-items-center">
+        <div className="grid md:grid-cols-3 gap-8 m-12 grid-items-center">
             {
                 products?.map(card => <Card
-                key={card._id}
+                key={card?._id}
                 card={card}
                 setProduct={setProduct}
                 ></Card>)
